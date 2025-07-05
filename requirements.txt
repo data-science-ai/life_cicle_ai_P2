@@ -1,0 +1,2 @@
+# Dependencias principales
+requests==2.31.0
