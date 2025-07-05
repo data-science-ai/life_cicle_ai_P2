@@ -1,9 +1,14 @@
 import tkinter as tk
 from tkinter import scrolledtext
+from dotenv import dotenv_values
 import requests
 import json
 
-BASE_URL = "http://localhost:11434/api/generate"
+env = dotenv_values(".env")
+
+BASE_URL = env["BASE_URL"]
+MODEL = env["MODEL"]
+MAX_TOKENS = env["MAX_TOKENS"]
 
 def process_prompt(user_input):
     ethical_prompt = (
@@ -20,6 +25,7 @@ def process_prompt(user_input):
     )
     return ethical_prompt + user_input
 
+
 def get_ai_response():
     user_input = user_input_field.get("1.0", tk.END).strip()
     modified_prompt = process_prompt(user_input)
@@ -27,10 +33,10 @@ def get_ai_response():
     response = requests.post(
         BASE_URL,
         json={
-            "model": "dolphin-mistral:latest",
+            "model": MODEL,
             "prompt": modified_prompt,
-            "max_tokens": 150
-        }
+            "max_tokens": MAX_TOKENS,
+        },
     )
 
     complete_response = ""
@@ -40,6 +46,7 @@ def get_ai_response():
             complete_response += data["response"]
 
     response_display.insert(tk.END, f"IA:\n{complete_response.strip()}\n")
+
 
 root = tk.Tk()
 root.title("Preguntar a llama3")
