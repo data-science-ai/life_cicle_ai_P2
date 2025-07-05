@@ -1,0 +1,9 @@
+<h1>hola</h1>
+<input
+  type="text"
+  [ngModel]="text()"
+  (ngModelChange)="text.set($event || '')"
+/>
+<button (click)="onSendOllama()">ollama</button>
+
+<span> {{response()}} </span>
