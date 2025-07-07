@@ -1,35 +1,24 @@
-# Etapa de construcción
-FROM node:20-alpine AS build
+# Stage 1: Build Angular application
+FROM node:22-alpine AS build
 
-# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos de configuración
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
-# Instalar dependencias
-RUN npm ci
+RUN npm cache clean --force
+RUN npm install @angular/build @angular/cli --save-dev
+RUN npm install
 
-# Copiar el resto de los archivos
 COPY . .
 
-# Construir la aplicación
-RUN npm run build -- --configuration production
+RUN npm run build
 
-# Etapa de producción
+# Stage 2: Serve Angular application with Nginx
 FROM nginx:alpine
 
-# Copiar configuración personalizada de Nginx
-COPY nginx-custom.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/chat-ollama/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Eliminar archivos por defecto de nginx
-RUN rm -rf /usr/share/nginx/html/*
-
-# Copiar archivos construidos
-COPY --from=build /app/dist/chat-ollama/ /usr/share/nginx/html/
-
-# Exponer el puerto 80
 EXPOSE 80
 
-# Iniciar Nginx
 CMD ["nginx", "-g", "daemon off;"]
