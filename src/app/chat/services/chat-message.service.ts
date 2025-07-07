@@ -14,10 +14,12 @@ export class ChatMessageService {
 
   addMessage(message: ChatMessage) {
     const id: string = uuidv4();
-    this.messages.update((messages) => [...messages, { ...message, id }]);
-  }
-
-  lastMessageByMe(): boolean {
-    return computed(() => this.messages().at(-1)?.me)() || false;
+    const date = new Date();
+    const hour = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    this.messages.update((messages) => [
+      ...messages,
+      { ...message, id, date: `${hour}:${minutes}` },
+    ]);
   }
 }

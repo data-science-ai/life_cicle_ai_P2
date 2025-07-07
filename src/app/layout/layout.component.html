@@ -1,3 +1,23 @@
-<main class="container mx-auto">
-  <router-outlet />
+<main class="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 p-4">
+  <div class="max-w-4xl mx-auto py-8">
+    <header class="text-center mb-12 p-6 bg-white rounded-xl shadow-md">
+      <h1
+        class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent mb-2"
+      >
+        AI Chat Interface
+      </h1>
+      <p class="text-xl text-indigo-700 font-medium mb-2">
+        Powered by Ollama AI
+      </p>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Experience advanced AI conversations with Ollama's cutting-edge language
+        models
+      </p>
+      <p class="text-gray-400 max-w-2xl mx-auto text-xs">Grupo - 11</p>
+    </header>
+
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <router-outlet />
+    </div>
+  </div>
 </main>

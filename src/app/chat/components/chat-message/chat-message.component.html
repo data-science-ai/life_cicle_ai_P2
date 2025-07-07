@@ -16,8 +16,8 @@
     }
   </div>
   <div class="chat-header">
-    {{ chatMessage().me ? "You" : "AI" }}
-    <time class="text-xs opacity-50">12:45</time>
+    {{ chatMessage().me ? "Me:" : "AI:" }}
+    <time class="text-xs opacity-50">{{ chatMessage().date }}</time>
   </div>
 
   <div class="chat-bubble">{{ chatMessage().message }}</div>
