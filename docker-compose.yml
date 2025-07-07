@@ -1,6 +1,23 @@
 version: '3.8'
 
 services:
+  # Servicio de la aplicación Angular
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat-ollama-frontend
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    depends_on:
+      - ollama
+    environment:
+      - NODE_ENV=production
+    networks:
+      - ollama-network
+
+  # Servicio de Ollama
   ollama:
     image: ollama/ollama
     container_name: ollama
@@ -9,6 +26,12 @@ services:
     volumes:
       - ollama:/root/.ollama
     restart: unless-stopped
+    networks:
+      - ollama-network
+
+networks:
+  ollama-network:
+    driver: bridge
 
 volumes:
   ollama:
