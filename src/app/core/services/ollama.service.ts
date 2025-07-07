@@ -29,7 +29,7 @@ export class OllamaService {
       .post<Ollama>(
         'http://localhost:11434/api/generate',
         {
-          model: 'phi4-mini-reasoning:3.8b', // gemma3n:e4b, phi4-mini-reasoning:3.8b
+          model: 'gemma3n:e4b', // gemma3n:e4b, phi4-mini-reasoning:3.8b
           prompt: systemPrompt + ' ' + value,
           stream: false,
           max_tokens: 150,
