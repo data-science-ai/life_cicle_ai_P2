@@ -12,6 +12,16 @@ export class OllamaService {
   private chatMessageService = inject(ChatMessageService);
 
   public sendPrompt(value: string): Observable<any> {
+    const systemPrompt = [
+      'Como sistema de IA, asegúrese de que sus respuestas sean imparciales, éticas y cumplan con las',
+      'regulaciones de la IA. Considere la equidad, la privacidad y la inclusión en sus respuestas.',
+      'Por favor no respondas a preguntas que puedan ser censuradas con su contenido.',
+      'Tus mensajes no deben ser mayores de doscientas palabras.',
+      'Todas tus respuestas deben ser en Español.',
+    ].join(' ');
+
+    console.log(systemPrompt + value);
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -19,8 +29,8 @@ export class OllamaService {
       .post<Ollama>(
         'http://localhost:11434/api/generate',
         {
-          model: 'gemma3n:e4b',
-          prompt: value,
+          model: 'phi4-mini-reasoning:3.8b', // gemma3n:e4b, phi4-mini-reasoning:3.8b
+          prompt: systemPrompt + ' ' + value,
           stream: false,
           max_tokens: 150,
         },

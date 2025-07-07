@@ -1,75 +1,62 @@
-# AI Chat Application with Ollama
+# 🤖 Proyecto AI con Ollama
 
-A modern web-based chat application that integrates with Ollama for AI-powered conversations. This project uses Angular for the frontend and is containerized with Docker for easy deployment.
+Este proyecto proporciona una interfaz de usuario para interactuar con los modelos de lenguaje de Ollama.
 
-## Features
+## 📋 Requisitos Previos
 
-- Modern, responsive web interface built with Angular
-- Integration with Ollama for AI-powered chat functionality
-- Containerized with Docker for easy setup and deployment
-- Scalable architecture using Docker Compose
+- ⚙️ Node.js 20 o superior
+- 🅰️ Angular CLI (instalar con `npm install -g @angular/cli`)
+- 🐳 Docker (para ejecutar Ollama)
 
-## Prerequisites
+## 🚀 Configuración para Desarrollo Local (Sin Docker para el Frontend)
 
-- [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-- Node.js (for local development without Docker)
-- npm or yarn (for local development without Docker)
+### 1️⃣ Instalar Node.js y Angular
+- 📥 Instalar Node.js 20 o superior desde [nodejs.org](https://nodejs.org/)
+- 🔧 Instalar Angular CLI globalmente:
+  ```bash
+  npm install -g @angular/cli
+  ```
 
-## Getting Started
-
-### Using Docker (Recommended)
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd ai_cicle_2
-   ```
-
-2. Start the services:
+### 2️⃣ Configurar Ollama con Docker
+1. 🐳 Iniciar el servicio de Ollama usando Docker Compose:
    ```bash
    docker-compose up -d
    ```
 
-3. Access the application:
-   - Frontend: http://localhost
-   - Ollama API: http://localhost:11434
-
-### Local Development
-
-For local development without Docker:
-
-1. Install dependencies:
+2. ⏳ Descargar los modelos requeridos (esto puede tomar tiempo):
    ```bash
-   npm install
+   docker exec -it ollama ollama pull gemma3n:e4b
+   docker exec -it ollama ollama pull phi4-mini-reasoning:3.8b
    ```
 
-2. Start the development server:
-   ```bash
-   ng serve
-   ```
+### 3️⃣ Configurar la Aplicación
+- 🔄 El modelo predeterminado es `gemma3n:e4b`
+- ⚙️ Para cambiar de modelo, modifica el parámetro `model` en:
+  `src/app/core/services/ollama.service.ts` (alrededor de la línea 32)
 
-3. The application will be available at http://localhost:4200
+### 4️⃣ Instalar Dependencias
+```bash
+npm install
+```
 
-## Project Structure
+### 5️⃣ Iniciar el Servidor de Desarrollo
+```bash
+ng serve
+```
 
-- `/frontend` - Angular application source code
-- `docker-compose.yml` - Docker Compose configuration
-- `Dockerfile` - Frontend Docker configuration
+🌐 La aplicación estará disponible en `http://localhost:4200`
 
-## Available Scripts
+## 🔄 Cambiando entre Modelos
+Para cambiar entre diferentes modelos:
+1. 📂 Abre `src/app/core/services/ollama.service.ts`
+2. 🔍 Localiza la configuración del modelo (alrededor de la línea 32)
+3. 🔄 Cambia el nombre del modelo por uno de estos:
+   - `gemma3n:e4b`
+   - `phi4-mini-reasoning:3.8b`
+4. 💾 Guarda el archivo y actualiza la aplicación
 
-- `npm start` - Start the development server
-- `npm run build` - Build the application for production
-- `npm test` - Run tests
-- `npm run lint` - Run linter
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [Angular](https://angular.io/)
-- [Ollama](https://ollama.ai/)
-- [Docker](https://www.docker.com/)
+## ⚠️ Notas Importantes
+- 🐳 Asegúrate de que Ollama esté ejecutándose en Docker antes de iniciar el frontend
+- ⏱️ La primera vez que descargues los modelos, puede tomar varios minutos dependiendo de tu conexión a internet
+- 💾 Asegúrate de tener suficiente espacio en disco para los modelos (varios GB)
+- 🔄 Después de cambiar el modelo, asegúrate de guardar los cambios y reiniciar la aplicación si es necesario
