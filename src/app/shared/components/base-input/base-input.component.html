@@ -13,6 +13,7 @@
     [formControl]="control()"
     [type]="inputType()"
     [placeholder]="placeholder()"
+    (keydown.enter)="onEnterKey($event)"
   />
   @if (invalidField) {
   <p class="error-text">{{ errorMessage }}</p>

@@ -16,4 +16,8 @@ export class ChatMessageService {
     const id: string = uuidv4();
     this.messages.update((messages) => [...messages, { ...message, id }]);
   }
+
+  lastMessageByMe(): boolean {
+    return computed(() => this.messages().at(-1)?.me)() || false;
+  }
 }

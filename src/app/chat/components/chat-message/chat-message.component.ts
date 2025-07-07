@@ -8,7 +8,6 @@ import { ChatMessage } from '../../interfaces/chat-message.interface';
   templateUrl: './chat-message.component.html',
 })
 export class ChatMessageComponent {
-  public loading = input<boolean>(false);
   public chatMessage = input<ChatMessage>({
     me: false,
     message: '',

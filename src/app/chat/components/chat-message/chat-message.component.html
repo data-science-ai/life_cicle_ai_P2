@@ -19,10 +19,7 @@
     {{ chatMessage().me ? "You" : "AI" }}
     <time class="text-xs opacity-50">12:45</time>
   </div>
-  @if (loading() && !chatMessage().me) {
-  <div class="chat-bubble">loading...</div>
-  } @else {
+
   <div class="chat-bubble">{{ chatMessage().message }}</div>
   <div class="chat-footer opacity-50">Delivered</div>
-  }
 </div>

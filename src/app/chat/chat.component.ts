@@ -7,10 +7,16 @@ import { BaseButtonComponent } from '../shared/components/base-button/base-butto
 import { BaseInputComponent } from '../shared/components/base-input/base-input.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatMessageService } from './services/chat-message.service';
+import { PacmanComponent } from '../shared/components/icons/pacman/pacman.component';
 
 @Component({
   selector: 'chat',
-  imports: [BaseButtonComponent, BaseInputComponent, ChatMessageComponent],
+  imports: [
+    BaseButtonComponent,
+    BaseInputComponent,
+    ChatMessageComponent,
+    PacmanComponent,
+  ],
   templateUrl: './chat.component.html',
 })
 export class ChatComponent {
@@ -45,5 +51,9 @@ export class ChatComponent {
 
   public get messages() {
     return this.chatMessageService.getMessages();
+  }
+
+  public get lastMessageByMe(): boolean {
+    return this.a.isLoading() && this.chatMessageService.lastMessageByMe();
   }
 }
