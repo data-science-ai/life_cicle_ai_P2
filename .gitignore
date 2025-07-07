@@ -213,3 +213,7 @@ logs/
 *.model
 *.h5
 *.joblib
+
+node_modules/
+.angular/
+dist/
