@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { OllamaService } from './services/ollama.service';
+import { OllamaService } from './core/services/ollama.service';
 
 @Component({
   selector: 'app-root',
