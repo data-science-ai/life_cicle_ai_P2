@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders, httpResource } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { ChatMessageService } from '../../chat/services/chat-message.service';
 import { Ollama } from '../../common/interfaces/ollama.interface';
-import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +33,6 @@ export class OllamaService {
         tap((res) => {
           console.log(res.response);
           this.chatMessageService.addMessage({
-            id: uuidv4(),
             me: false,
             message: res.response,
           });

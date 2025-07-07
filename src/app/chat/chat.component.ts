@@ -2,7 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
 import { of } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
 import { OllamaService } from '../core/services/ollama.service';
 import { BaseButtonComponent } from '../shared/components/base-button/base-button.component';
 import { BaseInputComponent } from '../shared/components/base-input/base-input.component';
@@ -36,9 +35,7 @@ export class ChatComponent {
     }
     this.inputValue.set(this.inputMessage.value!);
 
-    const id: string = uuidv4();
     this.chatMessageService.addMessage({
-      id,
       me: true,
       message: this.inputMessage.value!,
     });

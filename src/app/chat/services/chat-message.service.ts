@@ -1,5 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { ChatMessage } from '../interfaces/chat-message.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class ChatMessageService {
   }
 
   addMessage(message: ChatMessage) {
-    this.messages.update((messages) => [...messages, message]);
+    const id: string = uuidv4();
+    this.messages.update((messages) => [...messages, { ...message, id }]);
   }
 }

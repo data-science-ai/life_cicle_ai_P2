@@ -5,7 +5,7 @@
     class="border rounded-md p-2 border-cyan-700 h-96 overflow-y-auto flex flex-col gap-2"
   >
     @for (item of messages(); track item.id) {
-    <chat-message [chatMessage]="item" />
+    <chat-message [chatMessage]="item" [loading]="a.isLoading()" />
     }
   </section>
 
