@@ -1,0 +1,20 @@
+<section>
+  @if (label()) {
+  <label [for]="label()" class="label">{{ label() }}</label>
+  }
+  <input
+    class="input input-primary w-full"
+    [ngClass]="{
+      invalid: invalidField,
+      valid: !invalidField,
+      'invalid-focus': invalidField
+    }"
+    [id]="label()"
+    [formControl]="control()"
+    [type]="inputType()"
+    [placeholder]="placeholder()"
+  />
+  @if (invalidField) {
+  <p class="error-text">{{ errorMessage }}</p>
+  }
+</section>

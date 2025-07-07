@@ -1,0 +1,22 @@
+<p>{{ a.isLoading() }}</p>
+
+<section class="flex flex-col gap-2 w-full">
+  <section
+    class="border rounded-md p-2 border-cyan-700 h-96 overflow-y-auto flex flex-col gap-2"
+  >
+    @for (item of messages(); track item.id) {
+    <chat-message [chatMessage]="item" />
+    }
+  </section>
+
+  <div class="flex gap-x-1">
+    <shared-base-input
+      class="w-full"
+      placeholder="Message"
+      [control]="inputMessage"
+    />
+    <shared-base-button label="Send" (click)="onClick()" />
+  </div>
+</section>
+
+<!-- <pre>{{ messages() | json }}</pre> -->

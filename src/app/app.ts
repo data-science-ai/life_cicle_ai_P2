@@ -1,29 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { OllamaService } from './core/services/ollama.service';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule],
-  templateUrl: './app.html',
-  styleUrl: './app.css',
+  imports: [RouterOutlet],
+  template: '<router-outlet />',
 })
-export class App {
-  private readonly ollamaService = inject(OllamaService);
-  protected title = 'chat-ollama';
-  public text = signal<string | null>(null);
-  public response = signal<string>('');
-
-  public async onSendOllama() {
-    console.log({ text: this.text() });
-    if (!this.text()) return;
-    const a = await this.ollamaService.sendPrompt(this.text()!).subscribe({
-      next: (data) => {
-        console.log({ data });
-        this.response.set(data.response);
-      },
-      error: (error) => {},
-    });
-  }
-}
+export class App {}
