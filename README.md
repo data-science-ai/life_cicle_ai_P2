@@ -1,181 +1,75 @@
-# 🚀 Chat con IA Local
+# AI Chat Application with Ollama
 
-Una aplicación de escritorio desarrollada en Python que permite interactuar con modelos de IA locales a través de una interfaz gráfica intuitiva, compatible con Ollama en Docker.
+A modern web-based chat application that integrates with Ollama for AI-powered conversations. This project uses Angular for the frontend and is containerized with Docker for easy deployment.
 
-## ✨ Características Principales
+## Features
 
-- 🖥️ Interfaz gráfica intuitiva desarrollada con Tkinter
-- 🤖 Soporte para múltiples modelos de IA locales a través de Ollama
-- ⚙️ Configuración personalizable mediante variables de entorno
-- 💬 Intercambio de mensajes en tiempo real
-- 🐳 Fácil despliegue con Docker
-- 🔄 Historial de conversación
-- 🎨 Tema oscuro/claro
+- Modern, responsive web interface built with Angular
+- Integration with Ollama for AI-powered chat functionality
+- Containerized with Docker for easy setup and deployment
+- Scalable architecture using Docker Compose
 
-## 📋 Requisitos del Sistema
+## Prerequisites
 
-### Mínimos
-- Python 3.8 o superior
-- Docker y Docker Compose
-- 8GB de RAM (mínimo)
-- 10GB de espacio en disco
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- Node.js (for local development without Docker)
+- npm or yarn (for local development without Docker)
 
-### Recomendados
-- 16GB+ de RAM
-- GPU compatible con CUDA para mejor rendimiento
-- Conexión a Internet para descargar modelos
+## Getting Started
 
-## 🚀 Comenzando Rápidamente
+### Using Docker (Recommended)
 
-### Con Docker (Recomendado)
-
-1. **Clonar el repositorio**
+1. Clone the repository:
    ```bash
-   git clone https://github.com/tu-usuario/ai_cicle_2.git
+   git clone <repository-url>
    cd ai_cicle_2
    ```
 
-2. **Configurar variables de entorno**
-   Copia el archivo de plantilla y edítalo según tus necesidades:
-   ```bash
-   cp .env.template .env
-   ```
-
-   Configuración básica del archivo `.env`:
-   ```env
-   # Configuración de Ollama
-   BASE_URL=http://localhost:11434/api/generate
-   
-   # Modelo predeterminado (puedes cambiarlo por cualquier modelo soportado por Ollama)
-   MODEL=llama3
-   
-   # Máximo de tokens por respuesta
-   MAX_TOKENS=1000
-   
-   # Opcional: Configuración de proxy si es necesario
-   # HTTP_PROXY=
-   # HTTPS_PROXY=
-   ```
-
-3. **Iniciar los servicios**
+2. Start the services:
    ```bash
    docker-compose up -d
    ```
 
-4. **Descargar un modelo**
+3. Access the application:
+   - Frontend: http://localhost
+   - Ollama API: http://localhost:11434
+
+### Local Development
+
+For local development without Docker:
+
+1. Install dependencies:
    ```bash
-   # Descargar un modelo (ejemplo con llama3)
-   docker exec ollama ollama pull llama3
-   
-   # Listar modelos disponibles
-   # docker exec ollama ollama list
+   npm install
    ```
 
-5. **Iniciar la aplicación**
+2. Start the development server:
    ```bash
-   python app.py
+   ng serve
    ```
 
-### Instalación Manual
+3. The application will be available at http://localhost:4200
 
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/tu-usuario/ai_cicle_2.git
-   cd ai_cicle_2
-   ```
+## Project Structure
 
-2. **Crear y activar un entorno virtual (recomendado)**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # En Windows: .\venv\Scripts\activate
-   ```
+- `/frontend` - Angular application source code
+- `docker-compose.yml` - Docker Compose configuration
+- `Dockerfile` - Frontend Docker configuration
 
-3. **Instalar dependencias**
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Available Scripts
 
-4. **Configurar variables de entorno**
-   Sigue los mismos pasos que en la sección de Docker para configurar el archivo `.env`.
+- `npm start` - Start the development server
+- `npm run build` - Build the application for production
+- `npm test` - Run tests
+- `npm run lint` - Run linter
 
-5. **Iniciar la aplicación**
-   ```bash
-   python app.py
-   ```
+## License
 
-## 🛠️ Configuración de Ollama
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Si no estás usando Docker, necesitarás instalar y ejecutar Ollama manualmente:
+## Acknowledgments
 
-```bash
-# En Linux/macOS
-curl -fsSL https://ollama.com/install.sh | sh
-ollama serve &
-
-# O con Docker (si prefieres no usar el docker-compose proporcionado)
-docker run -d -p 11434:11434 --name ollama ollama/ollama
-```
-
-## 📱 Uso de la Aplicación
-
-1. **Iniciar la aplicación**
-   ```bash
-   python app.py
-   ```
-
-2. **Interfaz de usuario**
-   - Escribe tu pregunta en el campo de texto inferior
-   - Presiona Enter o haz clic en el botón "Enviar"
-   - Las respuestas aparecerán en el área de chat principal
-   - Usa el botón "Limpiar chat" para comenzar una nueva conversación
-
-3. **Características adicionales**
-   - Cambia entre tema claro/oscuro usando el botón en la esquina superior derecha
-   - Las conversaciones se guardan automáticamente
-   - Soporte para formato Markdown en las respuestas
-
-
-
-## 🔧 Configuración Avanzada
-
-### Variables de Entorno
-Crea un archivo `.env` en la raíz del proyecto con:
-```env
-BASE_URL=http://localhost:11434/api/generate
-MODEL=llama3  # Modelo a utilizar
-MAX_TOKENS=1000  # Máximo de tokens por respuesta
-```
-
-### Modelos Disponibles
-Puedes usar cualquier modelo compatible con Ollama. Algunos populares:
-- `llama3`
-- `mistral`
-- `llama2`
-- `dolphin-mistral`
-
-Para ver los modelos instalados:
-```bash
-docker exec ollama ollama list
-```
-
-## 🏗️ Estructura del Proyecto
-
-```
-.
-├── app.py              # Aplicación principal
-├── requirements.txt    # Dependencias de Python
-├── docker-compose.yml  # Configuración de Docker
-├── .env.example       # Plantilla de configuración
-├── README.md          # Este archivo
-└── .gitignore         # Archivos ignorados por Git
-```
-
-## 🔍 Solución de Problemas
-
-- **Error de conexión**: Verifica que Ollama esté en ejecución y accesible en `http://localhost:11434`
-- **Modelo no encontrado**: Asegúrate de haber descargado el modelo con `ollama pull <nombre-modelo>`
-- **Problemas de memoria**: Algunos modelos requieren mucha RAM. Prueba con un modelo más pequeño si tienes problemas.
-
-## 📄 Licencia
-
-Este proyecto está bajo la [Licencia MIT](LICENSE).
+- [Angular](https://angular.io/)
+- [Ollama](https://ollama.ai/)
+- [Docker](https://www.docker.com/)
